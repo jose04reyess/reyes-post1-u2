@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulario semántico y accesible de registro académico para estudiantes de Ingeniería de Sistemas en la Universidad de Santander UDES, 2026.">
+  <meta name="author" content="José Reyes">
+  <meta name="robots" content="index, follow">
+  <title>Formulario de Registro Académico | Ingeniería UDES 2026</title>
+  <style>
+    :root {
+      --bg-main: #0f172a;
+      --bg-surface: #1e293b;
+      --bg-card: #334155;
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --secondary: #818cf8;
+      --accent: #f43f5e;
+      --success: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #475569;
+      --focus-ring: #38bdf8;
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-bottom: 2px solid var(--primary);
+      padding: 2.5rem 1.5rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      color: var(--primary);
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+
+    nav {
+      background-color: rgba(30, 41, 59, 0.9);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+
+    nav a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    nav a:hover, nav a:focus {
+      background-color: var(--primary);
+      color: var(--bg-main);
+      outline: 2px solid var(--primary);
+    }
+
+    .main-wrapper {
+      max-width: 840px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    form {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    fieldset {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      background-color: rgba(51, 65, 85, 0.3);
+    }
+
+    legend {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: bold;
+      padding: 0 0.6rem;
+      border-radius: 4px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-group.horizontal {
+      flex-direction: row;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    label {
+      font-weight: 600;
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    .help-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="password"],
+    input[type="url"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      background-color: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--focus-ring);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+    }
+
+    input[type="color"] {
+      width: 60px;
+      height: 40px;
+      padding: 0.2rem;
+      background-color: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .range-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    output {
+      display: inline-block;
+      min-width: 2.5rem;
+      text-align: center;
+      background-color: var(--primary);
+      color: var(--bg-main);
+      font-weight: bold;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    input[type="file"] {
+      background-color: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+
+    .radio-item, .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    button[type="submit"] {
+      background-color: var(--primary);
+      color: var(--bg-main);
+    }
+
+    button[type="submit"]:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    button[type="reset"] {
+      background-color: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    button[type="reset"]:hover {
+      background-color: var(--border-color);
+    }
+
+    footer {
+      background-color: #0b1120;
+      border-top: 2px solid var(--border-color);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    address {
+      font-style: normal;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado Semántico -->
+  <header>
+    <h1>Sistema de Registro Académico y Profesional</h1>
+    <p>Facultad de Ingenierías | Universidad de Santander (UDES) 2026</p>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="../parte-1-pagina-semantica/index.html">Portafolio Semántico (Parte 1)</a></li>
+        <li><a href="#form-registro">Formulario de Registro</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contenedor Principal del Formulario -->
+  <div class="main-wrapper">
+    <main>
+      
+      <!-- Formulario Accesible y Validado -->
+      <form action="/api/registro" method="POST" autocomplete="on" id="form-registro" enctype="multipart/form-data">
+
+        <!-- Campos Ocultos de Contexto del Sistema -->
+        <input type="hidden" name="origen" id="origen" value="portal-academico-udes">
+        <input type="hidden" name="version" id="version" value="2.0">
+
+        <!-- Fieldset 1: Datos Personales -->
+        <fieldset>
+          <legend>1. Datos Personales</legend>
+
+          <!-- Input Text: Nombre Completo -->
+          <div class="form-group">
+            <label for="nombre-completo">Nombre Completo *</label>
+            <input 
+              type="text" 
+              id="nombre-completo" 
+              name="nombre_completo" 
+              required 
+              minlength="3" 
+              maxlength="80" 
+              placeholder="Ej. José Reyes" 
+              autocomplete="name"
+              aria-describedby="ayuda-nombre">
+            <p id="ayuda-nombre" class="help-text">Ingrese sus nombres y apellidos completos tal como figuran en su documento de identidad.</p>
+          </div>
+
+          <!-- Input Email: Correo Electrónico Institucional/Personal -->
+          <div class="form-group">
+            <label for="correo-electronico">Correo Electrónico *</label>
+            <input 
+              type="email" 
+              id="correo-electronico" 
+              name="correo_electronico" 
+              required 
+              placeholder="usuario@correo.udes.edu.co" 
+              autocomplete="email"
+              aria-describedby="ayuda-correo">
+            <p id="ayuda-correo" class="help-text">Le enviaremos la confirmación de registro a esta dirección electrónica.</p>
+          </div>
+
+          <!-- Input Tel: Teléfono (Decisión 3 - Opción A: Texto visible 'opcional') -->
+          <div class="form-group">
+            <label for="telefono">Número de teléfono (opcional)</label>
+            <input 
+              type="tel" 
+              id="telefono" 
+              name="telefono" 
+              pattern="[0-9]{10}" 
+              title="Debe contener exactamente 10 dígitos numéricos sin espacios ni guiones (Ej: 3101234567)"
+              placeholder="3101234567" 
+              autocomplete="tel"
+              aria-describedby="ayuda-telefono">
+            <p id="ayuda-telefono" class="help-text">Número móvil de contacto a 10 dígitos numéricos.</p>
+          </div>
+
+          <!-- Input Date: Fecha de Nacimiento -->
+          <div class="form-group">
+            <label for="fecha-nacimiento">Fecha de Nacimiento *</label>
+            <input 
+              type="date" 
+              id="fecha-nacimiento" 
+              name="fecha_nacimiento" 
+              required 
+              min="1950-01-01" 
+              max="2008-12-31" 
+              autocomplete="bday"
+              aria-describedby="ayuda-fecha">
+            <p id="ayuda-fecha" class="help-text">Debe tener al menos 18 años de edad para completar el registro.</p>
+          </div>
+        </fieldset>
+
+        <!-- Fieldset 2: Datos de Cuenta y Seguridad -->
+        <fieldset>
+          <legend>2. Datos de Cuenta y Seguridad</legend>
+
+          <!-- Input Text: Nombre de Usuario con Pattern -->
+          <div class="form-group">
+            <label for="nombre-usuario">Nombre de Usuario *</label>
+            <input 
+              type="text" 
+              id="nombre-usuario" 
+              name="nombre_usuario" 
+              required 
+              pattern="^[a-zA-Z0-9_]{4,16}$" 
+              title="El usuario debe tener entre 4 y 16 caracteres alfanuméricos o guiones bajos, sin espacios."
+              placeholder="Ej. reyes_jose" 
+              autocomplete="username"
+              aria-describedby="ayuda-usuario">
+            <p id="ayuda-usuario" class="help-text">Entre 4 y 16 caracteres alfanuméricos (letras, números y guion bajo).</p>
+          </div>
+
+          <!-- Input Password: Contraseña -->
+          <div class="form-group">
+            <label for="clave-acceso">Contraseña de Acceso *</label>
+            <input 
+              type="password" 
+              id="clave-acceso" 
+              name="clave_acceso" 
+              required 
+              minlength="8" 
+              autocomplete="new-password"
+              aria-describedby="ayuda-clave">
+            <p id="ayuda-clave" class="help-text">Mínimo 8 caracteres combinando mayúsculas, minúsculas y números.</p>
+          </div>
+
+          <!-- Input URL: Portafolio o Repositorio GitHub -->
+          <div class="form-group">
+            <label for="enlace-portafolio">Enlace al Portafolio o GitHub *</label>
+            <input 
+              type="url" 
+              id="enlace-portafolio" 
+              name="enlace_portafolio" 
+              required 
+              placeholder="https://github.com/jose04reyess" 
+              aria-describedby="ayuda-url">
+            <p id="ayuda-url" class="help-text">Incluya la URL completa comenzando con https://</p>
+          </div>
+        </fieldset>
+
+        <!-- Fieldset 3: Información Académica y Profesional -->
+        <fieldset>
+          <legend>3. Información Académica y Profesional</legend>
+
+          <!-- Input Number: Semestre Académico -->
+          <div class="form-group">
+            <label for="semestre-actual">Semestre Actual Matriculado *</label>
+            <input 
+              type="number" 
+              id="semestre-actual" 
+              name="semestre_actual" 
+              required 
+              min="1" 
+              max="10" 
+              value="7" 
+              aria-describedby="ayuda-semestre">
+            <p id="ayuda-semestre" class="help-text">Rango válido de 1 a 10 correspondiente al plan de estudios oficial.</p>
+          </div>
+
+          <!-- Select con Optgroup: Programa Académico -->
+          <div class="form-group">
+            <label for="programa-academico">Programa Académico *</label>
+            <select id="programa-academico" name="programa_academico" required aria-describedby="ayuda-programa">
+              <option value="" disabled selected>-- Seleccione su programa universitario --</option>
+              <optgroup label="Pregrados de Ingeniería">
+                <option value="ing-sistemas" selected>Ingeniería de Sistemas</option>
+                <option value="ing-software">Ingeniería de Software</option>
+                <option value="ing-electronica">Ingeniería Electrónica</option>
+                <option value="ing-industrial">Ingeniería Industrial</option>
+              </optgroup>
+              <optgroup label="Posgrados y Especializaciones">
+                <option value="esp-desarrollo-web">Especialización en Desarrollo Web y Móvil</option>
+                <option value="esp-ciberseguridad">Especialización en Seguridad Informática</option>
+                <option value="maestria-ti">Maestría en Gestión de Tecnologías de Información</option>
+              </optgroup>
+            </select>
+            <p id="ayuda-programa" class="help-text">Seleccione el programa curricular activo en la UDES.</p>
+          </div>
+
+          <!-- Inputs Radio: Modalidad de Estudio -->
+          <div class="form-group">
+            <label>Modalidad de Estudio Preferida *</label>
+            <div class="radio-group" role="radiogroup" aria-labelledby="modalidad-label">
+              <div class="radio-item">
+                <input type="radio" id="modalidad-presencial" name="modalidad" value="presencial" checked required>
+                <label for="modalidad-presencial">Presencial (Campus Lagos del Cacique)</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="modalidad-hibrida" name="modalidad" value="hibrida">
+                <label for="modalidad-hibrida">Híbrida / Asistida por TIC</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="modalidad-virtual" name="modalidad" value="virtual">
+                <label for="modalidad-virtual">100% Virtual</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input File con Accept: Hoja de Vida / Certificado -->
+          <div class="form-group">
+            <label for="soporte-academico">Hoja de Vida o Certificado Académico *</label>
+            <input 
+              type="file" 
+              id="soporte-academico" 
+              name="soporte_academico" 
+              required 
+              accept=".pdf,application/pdf,image/png,image/jpeg"
+              aria-describedby="ayuda-archivo">
+            <p id="ayuda-archivo" class="help-text">Formatos admitidos: PDF, PNG o JPG (Tamaño máximo: 5 MB).</p>
+          </div>
+        </fieldset>
+
+        <!-- Fieldset 4: Preferencias, Perfil y Términos -->
+        <fieldset>
+          <legend>4. Preferencias y Perfil</legend>
+
+          <!-- Input Range con Output Reactivo Nativo -->
+          <div class="form-group">
+            <label for="nivel-experiencia">Nivel de Experiencia en Desarrollo Web (1 = Básico, 10 = Avanzado)</label>
+            <div class="range-container">
+              <input 
+                type="range" 
+                id="nivel-experiencia" 
+                name="nivel_experiencia" 
+                min="1" 
+                max="10" 
+                value="8" 
+                oninput="document.getElementById('nivel-output').value = this.value"
+                aria-describedby="ayuda-range">
+              <output id="nivel-output" for="nivel-experiencia">8</output>
+            </div>
+            <p id="ayuda-range" class="help-text">Autoevaluación de conocimientos en HTML5 semántico, CSS3 y JavaScript.</p>
+          </div>
+
+          <!-- Input Color: Personalización -->
+          <div class="form-group horizontal">
+            <label for="color-tema">Color de Identidad del Perfil:</label>
+            <input type="color" id="color-tema" name="color_tema" value="#38bdf8" aria-describedby="ayuda-color">
+            <span id="ayuda-color" class="help-text">Seleccione el color temático para personalizar su panel.</span>
+          </div>
+
+          <!-- Textarea: Biografía / Carta de Motivación -->
+          <div class="form-group">
+            <label for="carta-motivacion">Biografía Profesional o Carta de Motivación *</label>
+            <textarea 
+              id="carta-motivacion" 
+              name="carta_motivacion" 
+              rows="4" 
+              cols="50" 
+              required 
+              maxlength="500" 
+              placeholder="Describa brevemente sus intereses en la ingeniería, metas profesionales y expectativas del laboratorio..."
+              aria-describedby="ayuda-textarea"></textarea>
+            <p id="ayuda-textarea" class="help-text">Máximo 500 caracteres.</p>
+          </div>
+
+          <!-- Inputs Checkbox: Términos y Boletín -->
+          <div class="form-group">
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="acepta-terminos" name="acepta_terminos" required>
+                <label for="acepta-terminos">Acepto los términos, condiciones y la política de tratamiento de datos personales de la UDES *</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="acepta-boletin" name="acepta_boletin" value="si">
+                <label for="acepta-boletin">Deseo recibir el boletín mensual de eventos, seminarios y hackathons de ingeniería</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Botones de Acción Semánticos -->
+        <div class="actions">
+          <button type="reset">Limpiar Formulario</button>
+          <button type="submit">Enviar Registro Académico</button>
+        </div>
+
+      </form>
+
+    </main>
+  </div>
+
+  <!-- Pie de Página Semántico -->
+  <footer>
+    <p>&copy; 2026 Universidad de Santander (UDES) — Formulario de Registro Oficial.</p>
+    <address>
+      Desarrollado por <strong>José Reyes</strong><br>
+      Programa de Ingeniería de Sistemas — Unidad 2: Programación Web Semántica y Accesible.
+    </address>
+  </footer>
+
+</body>
+</html>
